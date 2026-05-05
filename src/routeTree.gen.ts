@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as LifeRouteImport } from './routes/life'
 import { Route as HeadteacherRouteImport } from './routes/headteacher'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdmissionsRouteImport } from './routes/admissions'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -29,6 +30,11 @@ const LifeRoute = LifeRouteImport.update({
 const HeadteacherRoute = HeadteacherRouteImport.update({
   id: '/headteacher',
   path: '/headteacher',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdmissionsRoute = AdmissionsRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
+  '/contact': typeof ContactRoute
   '/headteacher': typeof HeadteacherRoute
   '/life': typeof LifeRoute
   '/programs': typeof ProgramsRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
+  '/contact': typeof ContactRoute
   '/headteacher': typeof HeadteacherRoute
   '/life': typeof LifeRoute
   '/programs': typeof ProgramsRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
+  '/contact': typeof ContactRoute
   '/headteacher': typeof HeadteacherRoute
   '/life': typeof LifeRoute
   '/programs': typeof ProgramsRoute
@@ -78,16 +87,25 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admissions'
+    | '/contact'
     | '/headteacher'
     | '/life'
     | '/programs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/admissions' | '/headteacher' | '/life' | '/programs'
+  to:
+    | '/'
+    | '/about'
+    | '/admissions'
+    | '/contact'
+    | '/headteacher'
+    | '/life'
+    | '/programs'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/admissions'
+    | '/contact'
     | '/headteacher'
     | '/life'
     | '/programs'
@@ -97,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdmissionsRoute: typeof AdmissionsRoute
+  ContactRoute: typeof ContactRoute
   HeadteacherRoute: typeof HeadteacherRoute
   LifeRoute: typeof LifeRoute
   ProgramsRoute: typeof ProgramsRoute
@@ -123,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/headteacher'
       fullPath: '/headteacher'
       preLoaderRoute: typeof HeadteacherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admissions': {
@@ -153,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdmissionsRoute: AdmissionsRoute,
+  ContactRoute: ContactRoute,
   HeadteacherRoute: HeadteacherRoute,
   LifeRoute: LifeRoute,
   ProgramsRoute: ProgramsRoute,
