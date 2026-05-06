@@ -5,6 +5,8 @@ export const SCHOOL = {
   tagline: "A modern CBC institution preparing learners for a bright future.",
   vision:
     "A community where all children feel loved, respected and encouraged to develop to their fullest potential.",
+  mission:
+    "To nurture confident, curious and caring learners through a CBC-aligned education that blends academic excellence, character formation and discovery — in a safe, joyful and inspiring environment.",
   phonePrimary: "+254 745 564 870",
   phonePrimaryTel: "+254745564870",
   whatsappNumber: "254745564870",
@@ -37,3 +39,61 @@ export const PROGRAMS = [
   { name: "Grade 3", fee: "Ksh 15,300" },
   { name: "Grade 4", fee: "Ksh 16,000" },
 ];
+
+export const LEADERSHIP = [
+  {
+    name: "Mr. Mbugua",
+    role: "Director & Founder",
+    bio: "Visionary founder of Infinity View Academy. He has built an institution where world-class infrastructure, safe transport, nutritious meals and inspiring learning spaces meet — making sure every child thrives.",
+    image: "director",
+    accent: "brand-green-deep",
+  },
+  {
+    name: "Tr. Dorcas Kisangi",
+    role: "Headteacher",
+    bio: "A passionate CBC educator who leads our academic team with warmth and rigour. Under her guidance the school grew from one learner to seventeen in its first year.",
+    image: "headteacher",
+    accent: "brand-orange",
+  },
+  {
+    name: "Mrs. Wanjiru",
+    role: "Deputy Headteacher · Academics",
+    bio: "Oversees our CBC curriculum delivery, teacher development and learner assessments — making sure every child is known, supported and stretched.",
+    image: "deputy",
+    accent: "brand-purple",
+  },
+  {
+    name: "Mr. Otieno",
+    role: "Administrator · Operations & Welfare",
+    bio: "Leads daily operations — transport, meals, safety and parent communication — keeping the school running smoothly so teachers can focus on teaching.",
+    image: "admin",
+    accent: "brand-green",
+  },
+] as const;
+
+export const VACANCIES = [
+  {
+    title: "CBC Lower Primary Teacher",
+    type: "Full-time",
+    location: "Ruai, Nairobi",
+    summary: "TSC-registered teacher with proven CBC experience to join our growing Grade 1–4 team.",
+  },
+  {
+    title: "Pre-Primary Teacher (PP1 / PP2)",
+    type: "Full-time",
+    location: "Ruai, Nairobi",
+    summary: "ECDE-trained, warm and creative educator passionate about play-based, child-centred learning.",
+  },
+  {
+    title: "Swimming & PE Coach",
+    type: "Part-time",
+    location: "Ruai, Nairobi",
+    summary: "Certified coach to lead age-appropriate swimming lessons and supervise sports activities.",
+  },
+  {
+    title: "School Bus Driver",
+    type: "Full-time",
+    location: "Infinity / Ruai / Mwihoko routes",
+    summary: "Experienced PSV driver with a clean record and genuine love for children's safety.",
+  },
+] as const;

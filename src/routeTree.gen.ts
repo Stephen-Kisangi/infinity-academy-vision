@@ -9,14 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VacanciesRouteImport } from './routes/vacancies'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as LifeRouteImport } from './routes/life'
+import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as HeadteacherRouteImport } from './routes/headteacher'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdmissionsRouteImport } from './routes/admissions'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VacanciesRoute = VacanciesRouteImport.update({
+  id: '/vacancies',
+  path: '/vacancies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgramsRoute = ProgramsRouteImport.update({
   id: '/programs',
   path: '/programs',
@@ -27,9 +35,19 @@ const LifeRoute = LifeRouteImport.update({
   path: '/life',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LeadershipRoute = LeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HeadteacherRoute = HeadteacherRouteImport.update({
   id: '/headteacher',
   path: '/headteacher',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -58,18 +76,24 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/headteacher': typeof HeadteacherRoute
+  '/leadership': typeof LeadershipRoute
   '/life': typeof LifeRoute
   '/programs': typeof ProgramsRoute
+  '/vacancies': typeof VacanciesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/headteacher': typeof HeadteacherRoute
+  '/leadership': typeof LeadershipRoute
   '/life': typeof LifeRoute
   '/programs': typeof ProgramsRoute
+  '/vacancies': typeof VacanciesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,9 +101,12 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/headteacher': typeof HeadteacherRoute
+  '/leadership': typeof LeadershipRoute
   '/life': typeof LifeRoute
   '/programs': typeof ProgramsRoute
+  '/vacancies': typeof VacanciesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -88,27 +115,36 @@ export interface FileRouteTypes {
     | '/about'
     | '/admissions'
     | '/contact'
+    | '/gallery'
     | '/headteacher'
+    | '/leadership'
     | '/life'
     | '/programs'
+    | '/vacancies'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/admissions'
     | '/contact'
+    | '/gallery'
     | '/headteacher'
+    | '/leadership'
     | '/life'
     | '/programs'
+    | '/vacancies'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/admissions'
     | '/contact'
+    | '/gallery'
     | '/headteacher'
+    | '/leadership'
     | '/life'
     | '/programs'
+    | '/vacancies'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,13 +152,23 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdmissionsRoute: typeof AdmissionsRoute
   ContactRoute: typeof ContactRoute
+  GalleryRoute: typeof GalleryRoute
   HeadteacherRoute: typeof HeadteacherRoute
+  LeadershipRoute: typeof LeadershipRoute
   LifeRoute: typeof LifeRoute
   ProgramsRoute: typeof ProgramsRoute
+  VacanciesRoute: typeof VacanciesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vacancies': {
+      id: '/vacancies'
+      path: '/vacancies'
+      fullPath: '/vacancies'
+      preLoaderRoute: typeof VacanciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programs': {
       id: '/programs'
       path: '/programs'
@@ -137,11 +183,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LifeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/leadership': {
+      id: '/leadership'
+      path: '/leadership'
+      fullPath: '/leadership'
+      preLoaderRoute: typeof LeadershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/headteacher': {
       id: '/headteacher'
       path: '/headteacher'
       fullPath: '/headteacher'
       preLoaderRoute: typeof HeadteacherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -180,19 +240,13 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdmissionsRoute: AdmissionsRoute,
   ContactRoute: ContactRoute,
+  GalleryRoute: GalleryRoute,
   HeadteacherRoute: HeadteacherRoute,
+  LeadershipRoute: LeadershipRoute,
   LifeRoute: LifeRoute,
   ProgramsRoute: ProgramsRoute,
+  VacanciesRoute: VacanciesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

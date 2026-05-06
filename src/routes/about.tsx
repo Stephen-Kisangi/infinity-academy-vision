@@ -2,7 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/PageHero";
 import aboutImg from "@/assets/about.jpg";
 import campusImg from "@/assets/campus.jpg";
-import { SCHOOL } from "@/lib/school";
+import { SCHOOL, LEADERSHIP } from "@/lib/school";
+import director from "@/assets/director.jpg";
+import headteacherImg from "@/assets/headteacher.jpg";
+import deputy from "@/assets/deputy.jpg";
+import admin from "@/assets/admin.jpg";
+
+const imageMap: Record<string, string> = { director, headteacher: headteacherImg, deputy, admin };
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -66,7 +72,12 @@ function AboutPage() {
 
       {/* MISSION/VISION/MOTTO */}
       <section className="section bg-card">
-        <div className="container-page grid md:grid-cols-3 gap-6">
+        <div className="container-page">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="eyebrow">What We Stand For</span>
+            <h2 className="mt-4 text-3xl md:text-5xl">Mission, Vision & Motto.</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
           <div className="feature-card">
             <span className="eyebrow">Our Vision</span>
             <p className="mt-4 text-lg leading-relaxed text-foreground italic">
@@ -81,11 +92,11 @@ function AboutPage() {
             </p>
           </div>
           <div className="feature-card">
-            <span className="eyebrow">Our Promise</span>
+            <span className="eyebrow">Our Mission</span>
             <p className="mt-4 text-lg leading-relaxed text-foreground">
-              World-class infrastructure, qualified caring teachers, safe transport, nutritious meals,
-              and an environment that is clean, safe and inspiring.
+              {SCHOOL.mission}
             </p>
+          </div>
           </div>
         </div>
       </section>
@@ -108,16 +119,38 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* LEADERSHIP TEASER */}
+      {/* LEADERSHIP TEAM */}
       <section className="section bg-primary text-white">
-        <div className="container-page text-center">
-          <span className="eyebrow !text-brand-gold">Our Leadership</span>
-          <h2 className="mt-4 text-3xl md:text-5xl !text-white">Guided by people who care.</h2>
-          <p className="mt-5 text-white/85 max-w-2xl mx-auto leading-relaxed">
-            Our Director Mr. Mbugua and our dedicated Headteacher Tr. Dorcas Kisangi have built an
-            institution where infrastructure, care and character meet — every single day.
-          </p>
-          <Link to="/headteacher" className="btn-orange mt-8">Meet Our Headteacher</Link>
+        <div className="container-page">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="eyebrow !text-brand-gold">Our Leadership</span>
+            <h2 className="mt-4 text-3xl md:text-5xl !text-white">Guided by people who care.</h2>
+            <p className="mt-5 text-white/85 leading-relaxed">
+              A team of dedicated educators and administrators behind every learner's success.
+            </p>
+          </div>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {LEADERSHIP.map((p) => (
+              <div key={p.name} className="bg-white/5 backdrop-blur rounded-3xl overflow-hidden border border-white/10 hover:border-brand-gold/40 transition-all duration-500 hover:-translate-y-1">
+                <img
+                  src={imageMap[p.image]}
+                  alt={p.name}
+                  loading="lazy"
+                  width={1024}
+                  height={1280}
+                  className="w-full aspect-[4/5] object-cover"
+                />
+                <div className="p-5 text-center">
+                  <div className="text-[10px] uppercase tracking-widest text-brand-gold font-bold">{p.role}</div>
+                  <div className="font-display text-lg !text-white mt-1">{p.name}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 flex flex-wrap gap-4 justify-center">
+            <Link to="/leadership" className="btn-orange">Meet the Team</Link>
+            <Link to="/headteacher" className="btn-outline-light">Headteacher's Speech</Link>
+          </div>
         </div>
       </section>
     </>
