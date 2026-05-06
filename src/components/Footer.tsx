@@ -29,10 +29,13 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               {[
                 ["/about", "About Us"],
+                ["/leadership", "Leadership"],
                 ["/headteacher", "Headteacher"],
                 ["/programs", "Programs & Fees"],
                 ["/admissions", "Admissions"],
                 ["/life", "School Life"],
+                ["/gallery", "Gallery"],
+                ["/vacancies", "Careers"],
                 ["/contact", "Contact"],
               ].map(([to, label]) => (
                 <li key={to}>
