@@ -13,6 +13,7 @@ import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as LifeRouteImport } from './routes/life'
 import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as HeadteacherRouteImport } from './routes/headteacher'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdmissionsRouteImport } from './routes/admissions'
 import { Route as AboutRouteImport } from './routes/about'
@@ -36,6 +37,11 @@ const LeadershipRoute = LeadershipRouteImport.update({
 const HeadteacherRoute = HeadteacherRouteImport.update({
   id: '/headteacher',
   path: '/headteacher',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/headteacher': typeof HeadteacherRoute
   '/leadership': typeof LeadershipRoute
   '/life': typeof LifeRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/headteacher': typeof HeadteacherRoute
   '/leadership': typeof LeadershipRoute
   '/life': typeof LifeRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admissions': typeof AdmissionsRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/headteacher': typeof HeadteacherRoute
   '/leadership': typeof LeadershipRoute
   '/life': typeof LifeRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admissions'
     | '/contact'
+    | '/gallery'
     | '/headteacher'
     | '/leadership'
     | '/life'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admissions'
     | '/contact'
+    | '/gallery'
     | '/headteacher'
     | '/leadership'
     | '/life'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admissions'
     | '/contact'
+    | '/gallery'
     | '/headteacher'
     | '/leadership'
     | '/life'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdmissionsRoute: typeof AdmissionsRoute
   ContactRoute: typeof ContactRoute
+  GalleryRoute: typeof GalleryRoute
   HeadteacherRoute: typeof HeadteacherRoute
   LeadershipRoute: typeof LeadershipRoute
   LifeRoute: typeof LifeRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/headteacher'
       fullPath: '/headteacher'
       preLoaderRoute: typeof HeadteacherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdmissionsRoute: AdmissionsRoute,
   ContactRoute: ContactRoute,
+  GalleryRoute: GalleryRoute,
   HeadteacherRoute: HeadteacherRoute,
   LeadershipRoute: LeadershipRoute,
   LifeRoute: LifeRoute,
@@ -208,3 +229,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
