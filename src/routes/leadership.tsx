@@ -8,6 +8,12 @@ import admin from "@/assets/admin.jpg";
 import campus from "@/assets/campus.jpg";
 
 const imageMap: Record<string, string> = { director, headteacher, deputy, admin };
+const accentMap: Record<string, string> = {
+  "brand-green": "bg-brand-green",
+  "brand-green-deep": "bg-brand-green-deep",
+  "brand-orange": "bg-brand-orange",
+  "brand-purple": "bg-brand-purple",
+};
 
 export const Route = createFileRoute("/leadership")({
   head: () => ({
@@ -50,7 +56,7 @@ function LeadershipPage() {
                   height={1280}
                   className="rounded-3xl object-cover w-full aspect-[4/5] shadow-[var(--shadow-lift)]"
                 />
-                <div className={`absolute -bottom-5 left-6 right-6 bg-${p.accent} text-white px-5 py-3 rounded-2xl shadow-lg text-center`}>
+                <div className={`absolute -bottom-5 left-6 right-6 ${accentMap[p.accent]} text-white px-5 py-3 rounded-2xl shadow-lg text-center`}>
                   <div className="text-[10px] uppercase tracking-widest text-white/85">{p.role}</div>
                   <div className="font-display text-lg !text-white">{p.name}</div>
                 </div>
