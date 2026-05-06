@@ -4,8 +4,20 @@ import aboutImg from "@/assets/about.jpg";
 import academicsImg from "@/assets/academics.jpg";
 import campusImg from "@/assets/campus.jpg";
 import busImg from "@/assets/bus.jpg";
+import g1 from "@/assets/gallery1.jpg";
+import g2 from "@/assets/gallery2.jpg";
+import g3 from "@/assets/gallery3.jpg";
+import g4 from "@/assets/gallery4.jpg";
+import g5 from "@/assets/gallery5.jpg";
+import g6 from "@/assets/gallery6.jpg";
+import director from "@/assets/director.jpg";
+import headteacherImg from "@/assets/headteacher.jpg";
+import deputy from "@/assets/deputy.jpg";
+import admin from "@/assets/admin.jpg";
 import { Logo } from "@/components/Logo";
-import { SCHOOL, waLink } from "@/lib/school";
+import { SCHOOL, waLink, LEADERSHIP } from "@/lib/school";
+
+const leaderImages: Record<string, string> = { director, headteacher: headteacherImg, deputy, admin };
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -213,6 +225,69 @@ function Home() {
           <div>
             <img src={busImg} alt="Infinity View Academy school bus" loading="lazy" width={1280} height={960}
               className="rounded-3xl object-cover w-full aspect-[4/3] shadow-[var(--shadow-lift)] border-4 border-white/20" />
+          </div>
+        </div>
+      </section>
+
+      {/* KIDS LIFE / GALLERY TEASER */}
+      <section className="section">
+        <div className="container-page">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <span className="eyebrow">Kids Life · Moments</span>
+              <h2 className="mt-4 text-3xl md:text-5xl">A childhood worth <span className="gradient-text">remembering</span>.</h2>
+              <p className="mt-4 text-muted-foreground leading-relaxed">
+                Every day at Infinity View is a chance to learn, laugh and grow — through play,
+                discovery, friendship and celebration.
+              </p>
+            </div>
+            <Link to="/gallery" className="btn-outline-custom self-start md:self-end">View Full Gallery</Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[220px]">
+            <figure className="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-3xl shadow-[var(--shadow-elegant)] group">
+              <img src={g1} alt="Children eager to answer in class" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            </figure>
+            {[g2, g5, g3, g4, g6].map((src, i) => (
+              <figure key={i} className="relative overflow-hidden rounded-2xl shadow-[var(--shadow-elegant)] group">
+                <img src={src} alt="Infinity View kids life" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* LEADERSHIP TEASER */}
+      <section className="section bg-card">
+        <div className="container-page">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="eyebrow">Our Leadership</span>
+            <h2 className="mt-4 text-3xl md:text-5xl">The people behind the mission.</h2>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              A dedicated team of educators and leaders walking alongside your child's journey.
+            </p>
+          </div>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {LEADERSHIP.map((p) => (
+              <div key={p.name} className="bg-card rounded-3xl overflow-hidden shadow-[var(--shadow-elegant)] hover:shadow-[var(--shadow-lift)] transition-all duration-500 hover:-translate-y-2 group">
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img
+                    src={leaderImages[p.image]}
+                    alt={p.name}
+                    loading="lazy"
+                    width={1024}
+                    height={1280}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-5 text-center">
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-brand-orange">{p.role}</div>
+                  <div className="font-display text-lg text-primary mt-1">{p.name}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link to="/leadership" className="btn-primary-custom">Meet the Full Team</Link>
           </div>
         </div>
       </section>
