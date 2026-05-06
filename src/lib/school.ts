@@ -5,6 +5,9 @@ export const SCHOOL = {
   tagline: "A modern CBC institution preparing learners for a bright future.",
   vision:
     "A community where all children feel loved, respected and encouraged to develop to their fullest potential.",
+  mission:
+    "To nurture confident, curious and caring learners through a CBC-aligned education that blends academic excellence, character formation and discovery — in a safe, joyful and inspiring environment.",
+  motto: "Learning Today, Leading Tomorrow",
   phonePrimary: "+254 745 564 870",
   phonePrimaryTel: "+254745564870",
   whatsappNumber: "254745564870",
